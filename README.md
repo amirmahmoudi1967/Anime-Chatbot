@@ -16,11 +16,12 @@ It may not be running right know due to deployment issue, but you can watch the 
 * [JikanJS](https://github.com/zuritor/jikanjs)
 
 ## How to use it ?
-The chatbot is divided in **2 parts**. The Facebook messenger platform and the recommender system. The Facebook messenger is made in [JavaScript](https://www.javascript.com) and the recommender system is made in python, so we had to make an external API to link both. The recommendation part is also available in a python [notebook](./recommandation/Anime Recommandation.ipynb)
+The chatbot is divided in **2 parts**. The Facebook messenger platform and the recommender system. The Facebook messenger is made in [JavaScript](https://www.javascript.com) and the recommender system is made in python, so we had to make an external API to link both. The recommendation part is also available in a python [notebook](./recommandation/Anime_Recommandation.ipynb)
 So, if you want to use the chatbot at home you will need to follow those steps:
 - Get a Facebook Messenger app setup on the Facebook developers’s platform, to get a page token.
-- Get a [LastFM](https://www.last.fm/) API key.
-- Create a .env file following the [.env.example](/.env.example) file
+- Install jikanjs librairy using :
+  `npm install jikanjs --save`
+- Modify the 
 - You can now run the chatbot with the command “npm run start” that will run the app and the python api
 - Finally register the webhook to your app with the verify token you choose at the creation of your .env file.
 
