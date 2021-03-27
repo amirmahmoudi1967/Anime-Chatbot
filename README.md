@@ -59,3 +59,8 @@ So, if you want to use the chatbot at home you will need to follow those steps:
 
 **Add Anime :**
 ![](/images/add.JPG)
+
+**Recommendation :**
+the api receive the chatbot input but there is a issue with getting the api answer in the chatbot but still the api is functionnal
+![](/images/reco.JPG)
+![](/images/apioutput.JPG)
