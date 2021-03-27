@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import pandas as pd
+import json
 import re
 import math
 import numpy as np
@@ -8,6 +9,26 @@ from numpy import linalg as LA
 app = Flask(__name__)
 
 @app.route('/api/recommandation_anime', methods=['POST'])
+def index():
+    #Check if all necessary data has been passed on
+    try:
+        user_anime = request.json['user_anime']
+    except:
+        return 'Bad request, user anime is mandatory', 400
+            
+    try:
+        n = request.json['n']
+    except:
+        n = 2
+    
+    if(user_anime and n != ''):
+        print("oui")
+        recommandation = recommandation_anime(user_anime, int(n))
+        output = json.dumps({'recommandation':recommandation}), 200, {'ContentType':'application/json'}
+        return output
+    else:
+        print("non")
+        return 'Bad request', 400
 
 def extractor(anime,line):
     linedata = anime.iloc[line]
@@ -32,33 +53,8 @@ def normalize(df):
                     df.iloc[index,13+i] = df.iloc[index,13+i]/math.sqrt(nbofgenres)
 
 def recommandation_anime(user_anime,n):
-    anime = pd.read_csv('myAnimeListDataset.csv')
-    animeId = []
-    title = []
-    type_animes = []
-    genres=[]
-
-    for i in range(anime.shape[0]):
-        mid, tit, typ, gen = extractor(anime,i)
-        animeId.append(mid)
-        title.append(tit)
-        type_animes.append(typ)
-        genres.append(gen)
-    
-    new_columns= list(anime.columns)
-    anime_norm=pd.DataFrame(columns=new_columns)
-    anime_norm['animeID'] = animeId
-    anime_norm['name'] = title
-    anime_norm['type'] = type_animes
-    anime_norm = anime_norm.drop(columns=['genre'])
-
-    genres_df = pd.DataFrame({"genre":list(genres)})
-    anime_norm = anime_norm.join(genres_df)
-    genres_ohe = pd.get_dummies(anime_norm.genre.apply(pd.Series).stack()).sum(level=0)
-    anime_norm = anime_norm.join(genres_ohe)
-
-    normalize(anime_norm)
-    anime_norm=anime_norm.drop(columns=["premiered","type","episodes","producer","licensor","studio","source","scored","scoredBy","members"])
+    print("début")
+    anime_norm=pd.read_pickle("./animedf.pkl")
     genre=['Action', 'Adventure', 'Cars', 'Comedy', 'Dementia', 'Demons', 'Drama', 'Ecchi', 'Fantasy', 'Game', 'Harem', 'Hentai', 'Historical', 'Horror', 'Josei', 'Kids', 'Magic', 'Martial Arts', 'Mecha', 'Military', 'Music', 'Mystery', 'Parody', 'Police', 'Psychological', 'Romance', 'Samurai', 'School', 'Sci-Fi', 'Seinen', 'Shoujo', 'Shoujo Ai', 'Shounen', 'Shounen Ai', 'Slice of Life', 'Space', 'Sports', 'Super Power', 'Supernatural', 'Thriller', 'Vampire', 'Yaoi', 'Yuri']
     new_columns= ["rating"]+list(anime_norm.columns)
     user_input=pd.DataFrame(columns=new_columns)
@@ -75,6 +71,7 @@ def recommandation_anime(user_anime,n):
     user_compute=pd.DataFrame([sums],columns=genre)
     best_recommanded_animes =[]
     list_movie_recommandations=[]
+    print("milieu")
     for index,anime in anime_norm.iloc[:200, :].iterrows():
         c=user_compute.values.tolist()
         sum_value=0
@@ -85,15 +82,15 @@ def recommandation_anime(user_anime,n):
             sum_value+=(c[0][i]*m[i])
         heuristic=sum_value/(normc*normm)
         list_movie_recommandations.append(heuristic)
-    indexs = sorted(range(len(list_movie_recommandations)),key=lambda i: list_movie_recommandations[i])[-3:]
+    indexs = sorted(range(len(list_movie_recommandations)),key=lambda i: list_movie_recommandations[i])[-n:]
     for e in indexs:
         best_recommanded_animes.append(anime_norm.iloc[e, :].animeID)
-    
+    print("fin")
     answer="\nWe recommand you to see : \n"
     for anime_reco in best_recommanded_animes:
         answer += str(anime_norm[anime_norm["animeID"]==anime_reco].name.to_string(index=False))
         answer += "\t|\t"
-
+    print(answer)
     return answer
 
 app.run('0.0.0.0', 8000)
