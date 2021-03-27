@@ -25,23 +25,19 @@ function sendResponse(f,sender,reply){
                     break;
                 
                 case 'Recommandation':
-                    console.log('reco')
                     let enough_anime = false
-                    console.log(user_input.length)
                     if(user_input.length >= 2){
                         enough_anime = true
                     }
                     if(enough_anime){
-                        //Call the API
-                        console.log('amir')
                         try{
+                            console.log("oui j'adore la vie")
                             res = await axios.post('http://localhost:8000/api/recommandation_anime', {user_anime: user_input, n:data.entities.number_recommandation})
-                            console.log(res)
-                            await f.txt(sender, `${res}`);
                         }
                         catch{
                             f.txt(sender, "Sorry, We have an issue with the API Service");
                         }
+                        await f.txt(sender, `${res.data['recommandation']}`);
                     }
                     else{
                         f.txt(sender, "Sorry, you don't have enough animes");
