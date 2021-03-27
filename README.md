@@ -32,6 +32,7 @@ So, if you want to use the chatbot at home you will need to follow those steps:
 **Congrats you can now start use your messenger Chatbot !**
 
 ## Demonstration
+### Click on the image below
 [![Chatbot](https://miro.medium.com/max/5600/1*RD1s9xBIvd_ycJUnX12Tyw@2x.png)](https://youtu.be/upZZAO2j1CA)
 
 ## All the command you can try
