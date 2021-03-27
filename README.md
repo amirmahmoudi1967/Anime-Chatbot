@@ -31,7 +31,7 @@ So, if you want to use the chatbot at home you will need to follow those steps:
 
 ## All the command you can try
 **Hello:**
-![](/images/hello.jpg)
+![](/images/hello.png)
 
 **Bye:**
-![](/images/bye.jpg)
+![](/images/bye.png)
