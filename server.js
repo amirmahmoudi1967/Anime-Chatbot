@@ -1,12 +1,10 @@
 `use strict`;
 
 const matcher = require('./matcher');
-const {getEpisode} = require('./jikan');
 const express = require (`express`) ;
 const bodyparser = require (`body-parser`) ;
 const config = require(`./config`);
 const FBeamer = require('./FBeamer');
-const jikan = require('./jikan');
 const f=new FBeamer(config.FB);
 const server = express () ;
 const PORT = process.env.PORT||3000;
