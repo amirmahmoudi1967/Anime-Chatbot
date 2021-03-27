@@ -28,16 +28,30 @@ So, if you want to use the chatbot at home you will need to follow those steps:
 - Register the webhook (using ngrok http 3000) to your app with the verify token you choose at the creation of your [development](./Config/development.json) file.
 - Run the python api in another shell using :
 `py app.py`
-- Congrats you can now start use your messenger Chatbot !
 
-**Your app is now up and running!**
+**Congrats you can now start use your messenger Chatbot !**
 
 ## Demonstration
 [![Chatbot](https://img.youtube.com/vi/PCf6l4FWhtE/0.jpg)](https://www.youtube.com/watch?v=PCf6l4FWhtE)
 
 ## All the command you can try
 **Hello:**
-\\![](/images/hello.jpg)
+![](/images/hello.jpg)
 
 **Bye:**
-\\![](/images/bye.jpg)
+![](/images/bye.jpg)
+
+**Season research:**
+![](/images/season.jpg)
+
+**Schedule research:**
+![](/images/schedule.jpg)
+
+**Upcoming Season:**
+![](/images/later.jpg)
+
+**Anime research:**
+![](/images/anime.jpg)
+
+**Add Anime :**
+![](/images/anime.jpg)
