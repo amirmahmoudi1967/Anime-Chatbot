@@ -41,17 +41,20 @@ So, if you want to use the chatbot at home you will need to follow those steps:
 **Bye:**
 ![](/images/bye.jpg)
 
+**Top :**
+![](/images/top.JPG)
+
 **Season research:**
-![](/images/season.jpg)
+![](/images/season.JPG)
 
 **Schedule research:**
-![](/images/schedule.jpg)
+![](/images/schedule.JPG)
 
 **Upcoming Season:**
-![](/images/later.jpg)
+![](/images/later.JPG)
 
 **Anime research:**
-![](/images/anime.jpg)
+![](/images/search.JPG)
 
 **Add Anime :**
-![](/images/anime.jpg)
+![](/images/add.JPG)
